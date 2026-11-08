@@ -79,7 +79,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
 
   /* ===== Nav ===== */
   header.main{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50; backdrop-filter:blur(6px); box-shadow:0 2px 14px rgba(0,84,133,.1);}
-  nav.wrap{position:relative; display:flex; align-items:center; justify-content:flex-start; height:76px;}
+  nav.wrap{position:relative; display:flex; align-items:center; justify-content:flex-start; width:100%; max-width:none; margin:0; height:76px;}
   .brand{display:flex; flex:1 1 auto; align-items:center; gap:12px; min-width:0;}
   .crest{width:42px; height:42px; flex:0 0 42px; object-fit:contain;}
   .brand-text .name{font-size:15px; font-weight:600; color:var(--navy-deep); line-height:1.15;}
