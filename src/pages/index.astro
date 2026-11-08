@@ -9,6 +9,78 @@ const announcements = activeAnnouncements(await getCollection("announcements")).
 const jobs = activeJobs(await getCollection("jobs")).filter((entry) => entry.slug !== "placeholder");
 const tenders = activeTenders(await getCollection("tenders")).filter((entry) => entry.slug !== "placeholder");
 const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" }).format(date);
+const departments = [
+  {
+    id: "dept-ict",
+    short: "ICT",
+    title: "Information & Communication Technology",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=700&auto=format&fit=crop",
+    alt: "ICT computer lab",
+    intro: "Build practical digital skills for modern workplaces through computer applications, information systems, networking, and user support.",
+    objectives: ["Develop confident computer users and digital problem-solvers", "Build practical skills in software, networks, and information systems", "Support innovation, online services, and digital entrepreneurship"],
+    programs: ["Diploma in Information Communication Technology", "Certificate in Information Technology", "Computer Applications / Packages"],
+  },
+  {
+    id: "dept-mechanical",
+    short: "Mechanical",
+    title: "Mechanical Engineering / Automotive",
+    image: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=700&auto=format&fit=crop",
+    alt: "Automotive mechanical workshop",
+    intro: "Learn through workshop-based training in vehicle systems, maintenance, diagnostics, fabrication, and safe use of tools and equipment.",
+    objectives: ["Develop hands-on competence in vehicle inspection and maintenance", "Apply workshop safety, measurement, and diagnostic practices", "Prepare trainees for automotive service, repair, and self-employment"],
+    programs: ["Automotive Engineering", "Motor Vehicle Mechanics", "Automotive short courses and driving-related skills"],
+  },
+  {
+    id: "dept-cosmetology",
+    short: "Cosmetology",
+    title: "Cosmetology",
+    image: "https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=700&auto=format&fit=crop",
+    alt: "Cosmetology salon training",
+    intro: "Develop professional beauty and personal-care skills through practical training in hairdressing, skincare, grooming, and salon enterprise.",
+    objectives: ["Build safe and professional personal-care techniques", "Develop client care, hygiene, and salon management skills", "Encourage creative practice and sustainable beauty enterprises"],
+    programs: ["Hairdressing and Beauty Therapy", "Cosmetology", "Beauty and personal-care short courses"],
+  },
+  {
+    id: "dept-business",
+    short: "Business",
+    title: "Business Studies",
+    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=700&auto=format&fit=crop",
+    alt: "Business studies class",
+    intro: "Gain practical business and office skills for administration, accounting, entrepreneurship, customer service, and small-enterprise management.",
+    objectives: ["Build strong foundations in business administration and records", "Apply accounting, communication, and customer-service skills", "Prepare trainees to manage workplaces and start sustainable enterprises"],
+    programs: ["Business Management", "Accounting and Finance", "Office administration and entrepreneurship"],
+  },
+  {
+    id: "dept-hospitality",
+    short: "Hospitality",
+    title: "Hospitality & Institutional Management",
+    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=700&auto=format&fit=crop",
+    alt: "Hospitality practical training",
+    intro: "Prepare for service-focused careers through practical training in food production, hospitality operations, housekeeping, and customer care.",
+    objectives: ["Develop professional food preparation and service routines", "Apply hygiene, safety, and hospitality standards", "Build communication and enterprise skills for hospitality workplaces"],
+    programs: ["Food and Beverage Production", "Food and Beverage Service", "Housekeeping and institutional management"],
+  },
+  {
+    id: "dept-building",
+    short: "Building & Civil",
+    title: "Building & Civil Engineering",
+    image: "/images/homepage/Building and Civil section visit by PS Dr. Mworia.jpg",
+    alt: "Building and Civil Engineering section visit",
+    intro: "Develop practical construction skills in building, masonry, plumbing, surveying, and site practice for the built environment.",
+    objectives: ["Build competence in construction tools, materials, and methods", "Apply safe and accurate workshop and site practices", "Prepare trainees for construction employment and independent work"],
+    programs: ["Building Technology", "Masonry and Plumbing", "Civil engineering support skills"],
+  },
+  {
+    id: "dept-electrical",
+    short: "Electrical",
+    title: "Electrical & Electronics Engineering",
+    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=700&auto=format&fit=crop",
+    alt: "Electrical engineering practical training",
+    intro: "Learn to install, maintain, test, and troubleshoot electrical and electronic systems with an emphasis on safe, practical application.",
+    objectives: ["Apply electrical installation and testing procedures safely", "Develop skills in wiring, maintenance, and fault diagnosis", "Build foundations for technical service and energy-related enterprises"],
+    programs: ["Electrical Installation", "Electrical and Electronics Engineering", "Solar and basic electrical short courses"],
+  },
+];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -417,13 +489,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
           <button class="nav-parent" type="button" aria-expanded="false">Departments</button>
           <div class="drop">
             <a data-nav="departments">All Departments</a>
-            <a data-nav="dept-ict">ICT</a>
-            <a data-nav="departments">Mechanical Engineering</a>
-            <a data-nav="departments">Cosmetology</a>
-            <a data-nav="departments">Business</a>
-            <a data-nav="departments">Hospitality & Institutional Mgmt</a>
-            <a data-nav="departments">Building & Civil Engineering</a>
-            <a data-nav="departments">Electrical & Electronics Eng.</a>
+            {departments.map((department) => <a data-nav={department.id}>{department.short}</a>)}
           </div>
         </div>
         <a data-nav="gallery">Gallery</a>
@@ -570,13 +636,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
         <p>Every department follows the same competency-based framework, built with industry to match real workforce demand.</p>
       </div>
       <div class="dept-grid">
-        <a class="dept-card" data-nav="dept-ict"><span class="dept-num">01</span><h3>ICT</h3><span class="arrow">Explore &rarr;</span></a>
-        <a class="dept-card" data-nav="departments"><span class="dept-num">02</span><h3>Mechanical Engineering / Automotive</h3><span class="arrow">Explore &rarr;</span></a>
-        <a class="dept-card" data-nav="departments"><span class="dept-num">03</span><h3>Cosmetology</h3><span class="arrow">Explore &rarr;</span></a>
-        <a class="dept-card" data-nav="departments"><span class="dept-num">04</span><h3>Business</h3><span class="arrow">Explore &rarr;</span></a>
-        <a class="dept-card" data-nav="departments"><span class="dept-num">05</span><h3>Hospitality & Institutional Management</h3><span class="arrow">Explore &rarr;</span></a>
-        <a class="dept-card" data-nav="departments"><span class="dept-num">06</span><h3>Building & Civil Engineering</h3><span class="arrow">Explore &rarr;</span></a>
-        <a class="dept-card" data-nav="departments"><span class="dept-num">07</span><h3>Electrical & Electronics Engineering</h3><span class="arrow">Explore &rarr;</span></a>
+        {departments.map((department, index) => <a class="dept-card" data-nav={department.id}><span class="dept-num">{String(index + 1).padStart(2, "0")}</span><h3>{department.short}</h3><span class="arrow">Explore &rarr;</span></a>)}
         <a class="dept-card" data-nav="admissions" style="background:var(--paper-dim);"><span class="dept-num">+</span><h3 style="color:var(--ink-soft);">General admission requirements, all departments</h3><span class="arrow">View &rarr;</span></a>
       </div>
     </section>
@@ -706,7 +766,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
           <div class="about-block" id="about-governance">
             <h2>Governance Structure</h2>
             <p>MTVC is a National Public Tertiary Institution under the Ministry of Education, operating under the Education Act and TVET Act 2013. The College is managed by a Board of Governors, with the Principal serving as CEO and Secretary to the Board. Day-to-day operations are supported by the Deputy Principal, Registrar, Dean of Students, and Heads of Departments. Students participate through an elected student council.</p>
-            <p>Six academic departments currently run: Business Studies, Automotive Engineering, Electrical and Electronics, Civil Engineering (Plumbing), ICT, and Cosmetology &mdash; alongside non-academic sections including Examinations, Industrial Attachment, Finance, Procurement, HR, and Sports & Games.</p>
+            <p>Seven training departments currently support the college mandate: Business Studies, Automotive Engineering, Electrical and Electronics, Civil Engineering, ICT, Cosmetology, and Hospitality & Institutional Management &mdash; alongside non-academic sections including Examinations, Industrial Attachment, Finance, Procurement, HR, and Sports & Games.</p>
           </div>
           <div class="about-block" id="about-mandate">
             <h2>Mandate & Mission</h2>
@@ -740,57 +800,46 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
     </div>
     <section class="wrap">
       <div class="dept-grid">
-        <a class="dept-card" data-nav="dept-ict"><span class="dept-num">01</span><h3>Information & Communication Technology</h3><span class="arrow">View department &rarr;</span></a>
-        <a class="dept-card" data-nav="dept-ict"><span class="dept-num">02</span><h3>Mechanical Engineering / Automotive</h3><span class="arrow">View department &rarr;</span></a>
-        <a class="dept-card" data-nav="dept-ict"><span class="dept-num">03</span><h3>Cosmetology</h3><span class="arrow">View department &rarr;</span></a>
-        <a class="dept-card" data-nav="dept-ict"><span class="dept-num">04</span><h3>Business Studies</h3><span class="arrow">View department &rarr;</span></a>
-        <a class="dept-card" data-nav="dept-ict"><span class="dept-num">05</span><h3>Hospitality & Institutional Management</h3><span class="arrow">View department &rarr;</span></a>
-        <a class="dept-card" data-nav="dept-ict"><span class="dept-num">06</span><h3>Building & Civil Engineering</h3><span class="arrow">View department &rarr;</span></a>
-        <a class="dept-card" data-nav="dept-ict"><span class="dept-num">07</span><h3>Electrical & Electronics Engineering</h3><span class="arrow">View department &rarr;</span></a>
+        {departments.map((department, index) => <a class="dept-card" data-nav={department.id}><span class="dept-num">{String(index + 1).padStart(2, "0")}</span><h3>{department.title}</h3><span class="arrow">View department &rarr;</span></a>)}
       </div>
     </section>
   </div>
 
-  <!-- ============ DEPARTMENT DETAIL: ICT (template page) ============ -->
-  <div class="page" id="page-dept-ict">
+  <!-- ============ DEPARTMENT DETAILS ============ -->
+  {departments.map((department) => <div class="page" id={`page-${department.id}`}>
     <div class="page-header">
       <div class="wrap">
-        <div class="breadcrumb"><a data-nav="home">Home</a><span class="sep">/</span><a data-nav="departments">Departments</a><span class="sep">/</span><span>ICT</span></div>
-        <h1>Information & Communication Technology</h1>
+        <div class="breadcrumb"><a data-nav="home">Home</a><span class="sep">/</span><a data-nav="departments">Departments</a><span class="sep">/</span><span>{department.short}</span></div>
+        <h1>{department.title}</h1>
       </div>
     </div>
     <section class="wrap">
       <div class="dept-detail">
         <div>
-          <div class="dept-detail-visual"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=700&auto=format&fit=crop" alt="ICT computer lab"></div>
+          <div class="dept-detail-visual"><img src={department.image} alt={department.alt}></div>
           <div class="other-depts">
-            <a href="#">Mechanical Eng.</a><a href="#">Cosmetology</a><a href="#">Business</a><a href="#">Hospitality</a><a href="#">Building & Civil</a><a href="#">Electrical & Electronics</a>
+            {departments.filter((other) => other.id !== department.id).map((other) => <a href={`#page-${other.id}`} data-nav={other.id}>{other.short}</a>)}
           </div>
         </div>
         <div>
           <span class="dept-tag">Department</span>
-          <p class="intro">Mandated to effectively conceive, develop, implement, utilize and manage appropriate ICT solution systems, providing integrated quality services to the institution in line with its vision, mission, and core values, alongside teaching and learning services.</p>
+          <p class="intro">{department.intro}</p>
 
           <h3 style="font-size:15.5px; margin-bottom:14px; color:var(--navy-deep);">Objectives</h3>
           <ul class="obj-list">
-            <li><span class="chk">&check;</span> Offer a diversified curriculum in accordance with guidelines from the Polytechnic Academic Board</li>
-            <li><span class="chk">&check;</span> Train end-users on computer literacy and provide end-user computing support</li>
-            <li><span class="chk">&check;</span> Offer technical advice and consultancy on ICT resource acquisition</li>
-            <li><span class="chk">&check;</span> Plan, implement, and develop ICT infrastructure</li>
+            {department.objectives.map((objective) => <li><span class="chk">&check;</span>{objective}</li>)}
           </ul>
 
           <h3 style="font-size:15.5px; margin-bottom:14px; color:var(--navy-deep);">Programs Offered</h3>
           <div class="programs">
-            <div class="program-row"><span>Diploma in Information Communication Technology</span><span class="tag">Diploma</span></div>
-            <div class="program-row"><span>Certificate in Information Technology</span><span class="tag">Certificate</span></div>
-            <div class="program-row"><span>Computer Applications / Packages</span><span class="tag">Short Course</span></div>
+            {department.programs.map((program, index) => <div class="program-row"><span>{program}</span><span class="tag">{index === 0 ? "Diploma" : index === 1 ? "Certificate" : "Short Course"}</span></div>)}
           </div>
 
           <a data-nav="admissions" class="btn btn-red" style="margin-top:32px;">Apply to this Department &rarr;</a>
         </div>
       </div>
     </section>
-  </div>
+  </div>)}
 
   <!-- ============ ADMISSIONS ============ -->
   <div class="page" id="page-admissions">
@@ -804,14 +853,8 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
     <section class="wrap tight">
       <div class="section-head"><div><span class="kicker">Requirements</span><h2>General requirements by department</h2></div></div>
       <div class="dept-grid">
-        <a class="dept-card"><span class="dept-num">PDF</span><h3>Building Department</h3><span class="arrow">Download &rarr;</span></a>
-        <a class="dept-card"><span class="dept-num">PDF</span><h3>Automotive Short Course</h3><span class="arrow">Download &rarr;</span></a>
-        <a class="dept-card"><span class="dept-num">PDF</span><h3>Automotive Technician</h3><span class="arrow">Download &rarr;</span></a>
-        <a class="dept-card"><span class="dept-num">PDF</span><h3>Cosmetology Department</h3><span class="arrow">Download &rarr;</span></a>
-        <a class="dept-card"><span class="dept-num">PDF</span><h3>Electrical Department</h3><span class="arrow">Download &rarr;</span></a>
-        <a class="dept-card"><span class="dept-num">PDF</span><h3>Food & Beverage Production</h3><span class="arrow">Download &rarr;</span></a>
-        <a class="dept-card"><span class="dept-num">PDF</span><h3>Fashion & Design</h3><span class="arrow">Download &rarr;</span></a>
-        <a class="dept-card" style="background:var(--paper-dim);"><span class="dept-num">i</span><h3 style="color:var(--ink-soft);">New applicants: download all 6 documents except the brochure</h3></a>
+        {departments.map((department, index) => <a class="dept-card" data-nav={department.id}><span class="dept-num">{String(index + 1).padStart(2, "0")}</span><h3>{department.title}</h3><span class="arrow">View department &rarr;</span></a>)}
+        <div class="dept-card" style="background:var(--paper-dim);"><span class="dept-num">i</span><h3 style="color:var(--ink-soft);">Contact admissions for current entry requirements and application documents.</h3></div>
       </div>
     </section>
     <section class="wrap">
