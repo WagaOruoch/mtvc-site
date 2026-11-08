@@ -3,7 +3,7 @@
   --color-accent: #eb232b;
   --color-highlight: #ffee6d;
   --color-text: #403f37;
-  --color-heading: #0a0500;
+  --color-heading: #005485;
   --color-bg: #ffffff;
   --color-bg-soft: #f9fafb;
   --color-bg-off: #fdfdfd;
@@ -47,7 +47,7 @@
 
 .cms-update-card:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 0.5rem 1.5rem rgb(10 5 0 / 8%);
+  box-shadow: 0 0.5rem 1.5rem rgb(0 84 133 / 12%);
 }
 
 .cms-update-card h3,
@@ -69,6 +69,86 @@
   color: var(--color-primary);
   font-size: 0.78rem;
   font-weight: 700;
+}
+
+.site-header {
+  border-bottom-color: var(--color-border);
+}
+
+.page-hero {
+  background: linear-gradient(120deg, #005485, #176b8f);
+  color: #fff;
+}
+
+.page-hero .eyebrow {
+  color: var(--color-highlight);
+}
+
+.page-hero .eyebrow::before {
+  background: var(--color-accent);
+}
+
+.page-hero h1 {
+  color: #fff;
+}
+
+.page-hero p {
+  color: rgb(255 255 255 / 84%);
+}
+
+.section > h2,
+.prose h2,
+.archive-heading {
+  color: var(--color-primary);
+}
+
+.card {
+  border-color: var(--color-border);
+  box-shadow: 0 0.5rem 1.5rem rgb(0 84 133 / 5%);
+}
+
+.card-link {
+  display: block;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card-link:hover,
+.card-link:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0.75rem 1.75rem rgb(0 84 133 / 12%);
+  transform: translateY(-2px);
+}
+
+.card h3 {
+  color: var(--color-primary);
+}
+
+.button {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.button-danger {
+  color: #fff;
+}
+
+.prose {
+  min-width: 0;
+}
+
+.prose > p:first-child {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.public-attachments h2 {
+  color: var(--color-primary);
 }
 
 @media (max-width: 800px) {
