@@ -39,20 +39,8 @@ const isCurrentPage = (href: string) =>
     <title>{title} | Mathioya Technical & Vocational College</title>
   </head>
   <body>
-    <div class="utility-bar">
-      <div class="container utility-inner">
-        <div><a href="/jobs/">Jobs</a><a href="/tenders/">Tenders</a><a href="https://elearning.mathioyatechnical.ac.ke/">ODeL</a><a href="/admin/">Staff portal</a></div>
-        <div><a href="https://web.facebook.com/MathioyaTechnical">Facebook</a><a href="https://www.tiktok.com/@mathioyatechnical">TikTok</a><a href="https://wa.me/254790678738">WhatsApp</a></div>
-      </div>
-    </div>
     <header class="site-header">
       <a class="skip-link" href="#main-content">Skip to content</a>
-      <div class="topbar">
-        <div class="container topbar-inner">
-          <span>Mathioya Technical & Vocational College</span>
-          <a href="/contact/">Contact the college</a>
-        </div>
-      </div>
       <div class="container brand-row">
         <a class="brand" href="/">
           <img class="brand-mark" src="/images/mtvc-crest.png" alt="" />
@@ -60,10 +48,8 @@ const isCurrentPage = (href: string) =>
             <strong>Mathioya Technical<br />& Vocational College</strong>
           </span>
         </a>
-        <a class="button button-small" href="/online-applications/">Apply now</a>
-      </div>
-      <nav class="main-nav" aria-label="Main navigation">
-        <div class="container nav-inner">
+        <nav class="main-nav" aria-label="Main navigation">
+          <div class="nav-inner">
           {navigation.map((item) => (
             <a
               href={item.href}
@@ -73,8 +59,10 @@ const isCurrentPage = (href: string) =>
               {item.label}
             </a>
           ))}
-        </div>
-      </nav>
+          </div>
+        </nav>
+        <a class="button button-small header-apply" href="/online-applications/">Apply now</a>
+      </div>
     </header>
     <main id="main-content">
       <slot />
@@ -92,10 +80,22 @@ const isCurrentPage = (href: string) =>
           <a href="/service-charter/">Service charter</a>
         </div>
         <div>
+          <strong>Portals</strong>
+          <a href="/jobs/">Jobs</a>
+          <a href="/tenders/">Tenders</a>
+          <a href="https://elearning.mathioyatechnical.ac.ke/">ODeL</a>
+          <a href="/admin/">Staff portal</a>
+        </div>
+        <div>
           <strong>Contact</strong>
           <p>Mathioya Technical & Vocational College, Kenya.</p>
           <a href="/contact/">View contact information</a>
         </div>
+      </div>
+      <div class="container footer-social-links">
+        <a href="https://web.facebook.com/MathioyaTechnical">Facebook</a>
+        <a href="https://www.tiktok.com/@mathioyatechnical">TikTok</a>
+        <a href="https://wa.me/254790678738">WhatsApp</a>
       </div>
       <div class="container copyright">© {new Date().getFullYear()} Mathioya Technical & Vocational College</div>
     </footer>

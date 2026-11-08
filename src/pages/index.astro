@@ -82,7 +82,7 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
   .brand{display:flex; align-items:center; gap:12px; min-width:0;}
   .crest{width:42px; height:42px; flex:0 0 42px; object-fit:contain;}
   .brand-text .name{font-size:15px; font-weight:600; color:var(--navy-deep); line-height:1.15;}
-  .nav-links{display:flex; align-items:center; gap:30px; min-width:0; font-size:14px; font-weight:500;}
+  .nav-links{display:flex; align-items:center; gap:30px; min-width:0; margin-left:auto; font-size:14px; font-weight:500;}
   .nav-links a,.nav-parent{color:var(--ink); position:relative; padding:6px 0;}
   .nav-parent{border:0; background:none; font:inherit; cursor:pointer;}
   .nav-links a:hover{color:var(--navy)}
@@ -98,7 +98,7 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
   .has-drop:hover .drop{opacity:1; visibility:visible; top:calc(100% + 8px);}
   .drop a{display:block; padding:9px 12px; border-radius:6px; font-size:13.5px;}
   .drop a:hover{background:var(--paper-dim); color:var(--navy);}
-  .nav-cta{display:flex; align-items:center; gap:16px;}
+  .nav-cta{display:flex; align-items:center; gap:16px; margin-left:24px;}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 20px; font-size:13.5px; font-weight:600; border-radius:6px; transition:all .15s; font-family:'Inter', sans-serif; border:none; cursor:pointer;}
   .btn-primary{background:var(--navy); color:#fff;}
   .btn-primary:hover{background:var(--navy-deep);}
@@ -385,23 +385,6 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
 </style>
 </head>
 <body>
-
-  <div class="utility">
-    <div class="wrap">
-      <div class="utility-links">
-        <a href="/jobs/">Jobs</a>
-        <a href="/tenders/">Tenders</a>
-        <a href="https://elearning.mathioyatechnical.ac.ke/">ODeL</a>
-        <a href="http://127.0.0.1:4323/admin/">Staff Portal</a>
-      </div>
-      <div class="utility-social">
-        <a href="#" aria-label="Facebook"><span class="social-label">Facebook</span><span class="social-icon" aria-hidden="true">f</span></a>
-        <a href="#" aria-label="TikTok"><span class="social-label">TikTok</span><span class="social-icon" aria-hidden="true">♪</span></a>
-        <a href="#" aria-label="WhatsApp"><span class="social-label">WhatsApp</span><span class="social-icon" aria-hidden="true">w</span></a>
-        <a href="#" aria-label="Phone"><span class="social-label">+254 745 633187</span><span class="social-icon" aria-hidden="true">☎</span></a>
-      </div>
-    </div>
-  </div>
 
   <header class="main">
     <nav class="wrap">
@@ -892,12 +875,13 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
           <a data-nav="policy">Service Charter</a>
           <a href="/jobs/">Jobs</a>
           <a href="/tenders/">Tenders</a>
+          <a href="/admin/">Staff Portal</a>
         </div>
         <div class="footer-col">
           <h4>Contact</h4>
           <a href="#">mathioyatti@gmail.com</a>
           <a href="#">+254 745 633187</a>
-          <a href="#">ODeL Portal</a>
+          <a href="https://elearning.mathioyatechnical.ac.ke/">ODeL Portal</a>
         </div>
       </div>
       <div class="footer-bottom">
