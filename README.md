@@ -1,7 +1,6 @@
 # MTVC website
 
-Static Astro website for Mathioya Technical & Vocational College. The old HTTrack mirror is kept beside this project as source material; it is not imported as application code.
-
+Static Astro website for Mathioya Technical & Vocational College. 
 ## Local setup
 
 Use Node.js 20.19 or newer (or Node.js 22 LTS) and npm.
