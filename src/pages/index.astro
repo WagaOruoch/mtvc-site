@@ -79,11 +79,11 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
 
   /* ===== Nav ===== */
   header.main{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50; backdrop-filter:blur(6px); box-shadow:0 2px 14px rgba(0,84,133,.1);}
-  nav.wrap{position:relative; display:flex; align-items:center; justify-content:space-between; height:76px;}
-  .brand{display:flex; align-items:center; gap:12px; min-width:0;}
+  nav.wrap{position:relative; display:flex; align-items:center; justify-content:flex-start; height:76px;}
+  .brand{display:flex; flex:1 1 auto; align-items:center; gap:12px; min-width:0;}
   .crest{width:42px; height:42px; flex:0 0 42px; object-fit:contain;}
   .brand-text .name{font-size:15px; font-weight:600; color:var(--navy-deep); line-height:1.15;}
-  .nav-links{display:flex; align-items:center; gap:30px; min-width:0; margin-left:auto; font-size:14px; font-weight:500;}
+  .nav-links{display:flex; flex:0 0 auto; align-items:center; gap:30px; min-width:0; margin-left:auto; font-size:14px; font-weight:500;}
   .nav-links a,.nav-parent{color:var(--ink); position:relative; padding:6px 0;}
   .nav-parent{border:0; background:none; font:inherit; cursor:pointer;}
   .nav-links a:hover{color:var(--navy)}
@@ -99,7 +99,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
   .has-drop:hover .drop{opacity:1; visibility:visible; top:calc(100% + 8px);}
   .drop a{display:block; padding:9px 12px; border-radius:6px; font-size:13.5px;}
   .drop a:hover{background:var(--paper-dim); color:var(--navy);}
-  .nav-cta{display:flex; align-items:center; gap:16px; margin-left:24px;}
+  .nav-cta{display:flex; flex:0 0 auto; align-items:center; gap:16px; margin-left:24px;}
   .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 20px; font-size:13.5px; font-weight:600; border-radius:6px; transition:all .15s; font-family:'Inter', sans-serif; border:none; cursor:pointer;}
   .btn-primary{background:var(--navy); color:#fff;}
   .btn-primary:hover{background:var(--navy-deep);}
@@ -303,6 +303,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-di
   .footer-social a:hover{background:var(--red); color:#fff;}
 
   @media (max-width: 1023px){
+    .brand{flex:0 1 auto;}
     .nav-links{display:none;}
     nav.wrap{height:68px;}
     .nav-links.is-open{position:absolute; top:calc(100% + 1px); right:20px; left:20px; display:flex; flex-direction:column; align-items:stretch; gap:2px; padding:10px; border:1px solid var(--line); border-radius:0 0 10px 10px; background:var(--paper); box-shadow:0 18px 36px -20px rgba(15,42,70,0.35); font-size:15px;}
