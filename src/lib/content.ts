@@ -27,19 +27,28 @@ export function sortNewest<T extends { data: { postedDate?: Date; startDate?: Da
 }
 
 export function activeJobs(entries: CollectionEntry<"jobs">[], now = new Date()) {
-  return sortNewest(entries.filter((entry) => isOpen(entry.data.closingDate, now)));
+  return sortByClosing(entries.filter((entry) => isOpen(entry.data.closingDate, now)));
 }
 
 export function archivedJobs(entries: CollectionEntry<"jobs">[], now = new Date()) {
-  return sortNewest(entries.filter((entry) => !isOpen(entry.data.closingDate, now) && isWithinArchive(entry.data.closingDate, now)));
+  return sortByClosing(entries.filter((entry) => !isOpen(entry.data.closingDate, now)));
 }
 
 export function activeTenders(entries: CollectionEntry<"tenders">[], now = new Date()) {
-  return sortNewest(entries.filter((entry) => isOpen(entry.data.closingDate, now)));
+  return sortByClosing(entries.filter((entry) => isOpen(entry.data.closingDate, now)));
 }
 
 export function archivedTenders(entries: CollectionEntry<"tenders">[], now = new Date()) {
-  return sortNewest(entries.filter((entry) => !isOpen(entry.data.closingDate, now) && isWithinArchive(entry.data.closingDate, now)));
+  return sortByClosing(entries.filter((entry) => !isOpen(entry.data.closingDate, now)));
+}
+
+function sortByClosing<T extends { data: { closingDate: Date } }>(entries: T[]) {
+  return [...entries].sort((a, b) => a.data.closingDate.getTime() - b.data.closingDate.getTime());
+}
+
+export function isClosingSoon(date: Date, now = new Date()) {
+  const days = (endOfDay(date).getTime() - now.getTime()) / 86400000;
+  return days >= 0 && days <= 7;
 }
 
 export function activeAnnouncements(entries: CollectionEntry<"announcements">[], now = new Date()) {

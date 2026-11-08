@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import PublicLayout from "../../layouts/PublicLayout.astro";
+import { activeTenders, archivedTenders, isClosingSoon } from "../../lib/content";
+
+const entries = await getCollection("tenders");
+const openTenders = activeTenders(entries).filter((entry) => entry.slug !== "placeholder");
+const closedTenders = archivedTenders(entries).filter((entry) => entry.slug !== "placeholder");
+const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" }).format(date);
+---
+<PublicLayout title="Tenders" description="Current tender notices from Mathioya Technical & Vocational College.">
+  <section class="page-hero"><div class="container"><p class="eyebrow">Procurement</p><h1>Tenders</h1><p>Current procurement notices from Mathioya Technical & Vocational College.</p></div></section>
+  <section class="container section listing-page">
+    <div class="section-heading"><div><p class="eyebrow">Open notices</p><h2>{openTenders.length} open {openTenders.length === 1 ? "tender" : "tenders"}</h2></div></div>
+    {openTenders.length ? <div class="notice-list" aria-label="Open tenders">{openTenders.map((entry) => (
+      <article class="notice-row">
+        <div class="notice-main"><div class="notice-title-line"><h3><a href={`/tenders/${entry.slug}/`}>{entry.data.title}</a></h3><span class:list={["status-badge", isClosingSoon(entry.data.closingDate) ? "status-soon" : "status-open"]}>{isClosingSoon(entry.data.closingDate) ? "Closing soon" : "Open"}</span></div><p>{entry.data.reference}</p><small>Closing {formatDate(entry.data.closingDate)}</small></div>
+        <div class="notice-actions"><a class="button button-small" href={`/tenders/${entry.slug}/`}>View details</a>{entry.data.attachments.find((file) => file.toLowerCase().endsWith(".pdf")) && <a class="button button-small button-outline-dark" href={entry.data.attachments.find((file) => file.toLowerCase().endsWith(".pdf"))} target="_blank" rel="noreferrer">Download notice</a>}</div>
+      </article>
+    ))}</div> : <p class="empty-state">There are no open tenders at the moment. Please check back soon, or <a href="/#page-contact">contact the college</a>.</p>}
+    {closedTenders.length > 0 && <details class="closed-notices"><summary>Closed notices ({closedTenders.length})</summary><div class="notice-list">{closedTenders.map((entry) => <article class="notice-row notice-row-closed"><div class="notice-main"><div class="notice-title-line"><h3><a href={`/tenders/${entry.slug}/`}>{entry.data.title}</a></h3><span class="status-badge status-closed">Closed</span></div><p>{entry.data.reference}</p><small>Closed {formatDate(entry.data.closingDate)}</small></div><div class="notice-actions"><a class="button button-small" href={`/tenders/${entry.slug}/`}>View details</a>{entry.data.attachments.find((file) => file.toLowerCase().endsWith(".pdf")) && <a class="button button-small button-outline-dark" href={entry.data.attachments.find((file) => file.toLowerCase().endsWith(".pdf"))} target="_blank" rel="noreferrer">Download notice</a>}</div></article>)}</div></details>}
+  </section>
+</PublicLayout>
