@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("tenders");
+  return entries
+    .filter((entry) => entry.slug !== "placeholder")
+    .map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const isPdf = (file: string) => file.toLowerCase().endsWith(".pdf");
+const isImage = (file: string) => /\.(avif|bmp|gif|jpe?g|png|svg|tiff?|webp)$/i.test(file);
+---
+<BaseLayout title={entry.data.title}>
+  <section class="page-hero"><div class="container"><p class="eyebrow">{entry.data.type}</p><h1>{entry.data.title}</h1><p>{entry.data.reference}</p></div></section>
+  <section class="container section prose">
+    <p><strong>Posted:</strong> {entry.data.postedDate.toLocaleDateString()} · <strong>Closing:</strong> {entry.data.closingDate.toLocaleDateString()}</p>
+    {entry.data.openingDate && <p><strong>Opening:</strong> {entry.data.openingDate.toLocaleString()}</p>}
+    <Content />
+    {entry.data.attachments.length > 0 && <section class="public-attachments" aria-labelledby="tender-attachment-title">
+      <h2 id="tender-attachment-title">Tender Attachments</h2>
+      <div class="public-attachment-grid">
+        {entry.data.attachments.map((file) => <article class="public-attachment">
+          {isPdf(file) && <iframe class="public-pdf-preview" src={file} title={`Preview of ${entry.data.title} attachment`}></iframe>}
+          {isImage(file) && <img class="public-image-preview" src={file} alt={`Preview of ${entry.data.title} attachment`} />}
+          {!isPdf(file) && !isImage(file) && <p>This file cannot be previewed in the browser.</p>}
+          <a class="button" href={file} target="_blank" rel="noreferrer">Open Or Download Attachment</a>
+        </article>)}
+      </div>
+    </section>}
+  </section>
+</BaseLayout>

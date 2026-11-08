@@ -1,0 +1,103 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+import "../styles/global.css";
+import "../styles/brand.css";
+
+const {
+  title,
+  description = "Hands-on skill for self-reliance at Mathioya Technical & Vocational College.",
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const navigation = [
+  { label: "Home", href: "/" },
+  { label: "About us", href: "/about/" },
+  { label: "Admissions", href: "/admissions/" },
+  { label: "Departments", href: "/departments/" },
+  { label: "Downloads", href: "/downloads/" },
+  { label: "Jobs", href: "/jobs/" },
+  { label: "Tenders", href: "/tenders/" },
+  { label: "Contact", href: "/contact/" },
+];
+
+const isCurrentPage = (href: string) =>
+  href === "/"
+    ? currentPath === href
+    : currentPath === href || currentPath.startsWith(href);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title} | Mathioya Technical & Vocational College</title>
+  </head>
+  <body>
+    <div class="utility-bar">
+      <div class="container utility-inner">
+        <div><a href="/jobs/">Jobs</a><a href="/tenders/">Tenders</a><a href="https://elearning.mathioyatechnical.ac.ke/">ODeL</a><a href="/admin/">Staff portal</a></div>
+        <div><a href="https://web.facebook.com/MathioyaTechnical">Facebook</a><a href="https://www.tiktok.com/@mathioyatechnical">TikTok</a><a href="https://wa.me/254790678738">WhatsApp</a></div>
+      </div>
+    </div>
+    <header class="site-header">
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <div class="topbar">
+        <div class="container topbar-inner">
+          <span>Mathioya Technical & Vocational College</span>
+          <a href="/contact/">Contact the college</a>
+        </div>
+      </div>
+      <div class="container brand-row">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span>
+            <strong>Mathioya Technical<br />& Vocational College</strong>
+          </span>
+        </a>
+        <a class="button button-small" href="/online-applications/">Apply now</a>
+      </div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <div class="container nav-inner">
+          {navigation.map((item) => (
+            <a
+              href={item.href}
+              class:list={{ active: isCurrentPage(item.href) }}
+              aria-current={isCurrentPage(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>Mathioya Technical & Vocational College</strong>
+          <p>Practical training for work, enterprise, and self-reliance.</p>
+        </div>
+        <div>
+          <strong>Quick links</strong>
+          <a href="/downloads/">Downloads</a>
+          <a href="/online-applications/">Online applications</a>
+          <a href="/service-charter/">Service charter</a>
+        </div>
+        <div>
+          <strong>Contact</strong>
+          <p>Mathioya Technical & Vocational College, Kenya.</p>
+          <a href="/contact/">View contact information</a>
+        </div>
+      </div>
+      <div class="container copyright">© {new Date().getFullYear()} Mathioya Technical & Vocational College</div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const albums = (await getCollection("gallery")).filter((entry) => entry.slug !== "placeholder");
+---
+<BaseLayout title="Gallery">
+  <section class="page-hero"><div class="container"><p class="eyebrow">Campus life</p><h1>Gallery</h1><p>Moments from workshops, practicals, and events at MTVC.</p></div></section>
+  <section class="container section">
+    {albums.length ? <div class="card-grid three">{albums.map((album) => <article class="card"><h2>{album.data.title}</h2><p><strong>Department:</strong> {album.data.department} · {album.data.date.toLocaleDateString()}</p><div class="gallery-grid">{album.data.photos.map((photo) => <figure><img src={photo.image} alt={photo.caption ?? `${album.data.department} gallery photo`} /><figcaption>{photo.caption}</figcaption></figure>)}</div>{album.data.videos.length > 0 && <div class="gallery-videos">{album.data.videos.map((video) => <video controls preload="metadata" src={video}>Gallery video</video>)}</div>}</article>)}</div> : <div class="prose"><h2>Gallery awaiting college photos</h2><p>Staff will add approved albums and captions through the CMS.</p></div>}
+  </section>
+</BaseLayout>

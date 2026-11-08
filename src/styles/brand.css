@@ -1,0 +1,78 @@
+:root {
+  --color-primary: #005485;
+  --color-accent: #eb232b;
+  --color-highlight: #ffee6d;
+  --color-text: #403f37;
+  --color-heading: #0a0500;
+  --color-bg: #ffffff;
+  --color-bg-soft: #f9fafb;
+  --color-bg-off: #fdfdfd;
+  --color-border: #edeff2;
+  --color-rule: #f2f1f1;
+  --color-on-primary: #ffffff;
+  --color-on-accent: #ffffff;
+  --color-on-highlight: #0a0500;
+  --navy: var(--color-primary);
+  --navy-deep: var(--color-heading);
+  --red: var(--color-accent);
+  --gold: var(--color-highlight);
+  --paper: var(--color-bg);
+  --paper-dim: var(--color-bg-soft);
+  --ink: var(--color-text);
+  --ink-soft: var(--color-text);
+  --line: var(--color-border);
+}
+
+.cms-updates {
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+}
+
+.cms-update-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.cms-update-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.35rem;
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent);
+  border-radius: 0.7rem;
+  background: var(--color-bg);
+}
+
+.cms-update-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0.5rem 1.5rem rgb(10 5 0 / 8%);
+}
+
+.cms-update-card h3,
+.cms-update-card p {
+  margin: 0;
+}
+
+.cms-update-card h3 {
+  color: var(--color-heading);
+}
+
+.cms-update-card p {
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.cms-update-card small,
+.cms-update-type {
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+@media (max-width: 800px) {
+  .cms-update-grid {
+    grid-template-columns: 1fr;
+  }
+}

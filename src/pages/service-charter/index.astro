@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const [charter] = await getCollection("service-charter");
+---
+<BaseLayout title="Service charter">
+  <section class="page-hero"><div class="container"><p class="eyebrow">Our commitment</p><h1>Service charter</h1></div></section>
+  <section class="container section prose">
+    <p>The service charter explains the standards and values that guide service delivery at MTVC.</p>
+    <h2>Audio versions</h2>
+    {charter?.data.englishAudio && <p><audio controls preload="none" src={charter.data.englishAudio}>English service charter audio</audio></p>}
+    {charter?.data.swahiliAudio && <p><audio controls preload="none" src={charter.data.swahiliAudio}>Swahili service charter audio</audio></p>}
+    {charter?.data.signLanguageLink && <p><a class="button" href={charter.data.signLanguageLink}>View sign language version</a></p>}
+    {charter?.data.pdf && <><iframe class="public-pdf-preview" src={charter.data.pdf} title="Service charter PDF preview"></iframe><p><a class="button" href={charter.data.pdf}>Download service charter PDF</a></p></>}
+    {!charter?.data.englishAudio && !charter?.data.swahiliAudio && !charter?.data.signLanguageLink && !charter?.data.pdf && <p>Current service charter files are awaiting confirmation by MTVC.</p>}
+  </section>
+</BaseLayout>
