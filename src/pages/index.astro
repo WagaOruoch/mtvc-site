@@ -106,7 +106,7 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
   .btn-red:hover{background:#9C2A22;}
   .btn-outline{border:1px solid rgba(255,255,255,0.28); color:#fff; background:none;}
   .btn-outline:hover{border-color:#fff;}
-  .mobile-toggle{display:none; font-size:22px; background:none; border:none; color:var(--navy-deep); cursor:pointer;}
+  .mobile-toggle{display:none; width:42px; height:42px; padding:0; border:1px solid var(--line); border-radius:6px; background:var(--paper); color:var(--navy-deep); font-size:22px; cursor:pointer;}
 
   /* ===== Hero (home) ===== */
   .hero{position:relative; background:linear-gradient(120deg, var(--navy-deep) 0%, var(--navy) 60%); overflow:hidden; color:#fff;}
@@ -301,6 +301,15 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
 
   @media (max-width: 900px){
     .nav-links{display:none;}
+    nav.wrap{height:68px;}
+    .nav-links.is-open{position:absolute; top:calc(100% + 1px); right:20px; left:20px; display:flex; align-items:stretch; gap:0; padding:10px; border:1px solid var(--line); border-radius:0 0 10px 10px; background:var(--paper); box-shadow:0 18px 36px -20px rgba(15,42,70,0.35); font-size:15px;}
+    .nav-links.is-open > a,
+    .nav-links.is-open > .has-drop > a{display:block; padding:12px 10px; border-radius:6px;}
+    .nav-links.is-open > a:hover,
+    .nav-links.is-open > .has-drop > a:hover{background:var(--paper-dim);}
+    .nav-links.is-open .drop{position:static; min-width:0; padding:0 0 4px 14px; border:0; border-radius:0; box-shadow:none; opacity:1; visibility:visible; transform:none;}
+    .nav-links.is-open .drop a{padding:9px 10px; font-size:14px;}
+    .nav-cta .btn{display:none;}
     .mobile-toggle{display:block;}
     .hero-inner{grid-template-columns:1fr; padding:56px 24px 64px;}
     .hero h1{font-size:34px;}
@@ -378,7 +387,7 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
       <div class="nav-cta">
         <a data-nav="admissions" class="btn btn-ghost">Downloads</a>
         <a data-nav="admissions" class="btn btn-primary">Apply Now</a>
-        <button class="mobile-toggle">&#9776;</button>
+        <button class="mobile-toggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation">&#9776;</button>
       </div>
     </nav>
   </header>
@@ -850,6 +859,22 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
 <script is:inline>
   const pages = document.querySelectorAll('.page');
   const navLinks = document.querySelectorAll('[data-nav]');
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const mobileMenu = document.getElementById('navLinks');
+
+  function closeMobileMenu(){
+    if(!mobileToggle || !mobileMenu) return;
+    mobileMenu.classList.remove('is-open');
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    mobileToggle.setAttribute('aria-label', 'Open navigation');
+  }
+
+  mobileToggle?.addEventListener('click', () => {
+    if(!mobileMenu) return;
+    const isOpen = mobileMenu.classList.toggle('is-open');
+    mobileToggle.setAttribute('aria-expanded', String(isOpen));
+    mobileToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  });
 
   function goTo(id){
     pages.forEach(p => p.classList.remove('active'));
@@ -857,6 +882,7 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
     if(target){ target.classList.add('active'); window.scrollTo({top:0, behavior:'smooth'}); }
     document.querySelectorAll('.nav-links > a, .nav-links .has-drop > a').forEach(a => a.classList.remove('active'));
     document.querySelectorAll('.nav-links [data-nav="' + id + '"]').forEach(a => a.classList.add('active'));
+    closeMobileMenu();
   }
 
   navLinks.forEach(el => {
