@@ -23,14 +23,14 @@ Open the CMS at `http://127.0.0.1:4323/admin/` or click Staff portal on the webs
 
 ## Project structure
 
-- `src/pages/` contains public routes.
+- `src/pages/index.astro` contains the single-page public website and its in-page sections.
 - `src/layouts/` contains shared page structure.
 - `src/styles/` contains the small global CSS layer.
 - `src/content/` contains staff-managed Markdown content and schemas.
 - `cms-server.mjs` is the local MTVC CMS server and editor.
 - `public/uploads/` is the CMS media destination.
 
-Jobs, tenders, announcements, gallery albums, department requirements, intakes, and the service charter are Markdown content managed by the custom CMS. Items with closing or end dates are filtered in the corresponding page before publication. Jobs and tenders accept PDF or image attachments; department requirements accept an uploaded document per department and intake; each intake stores its own official application-form URL; announcements accept poster images; gallery albums record their department and accept photos and videos; and the service charter accepts audio files and a PDF. The local version saves immediately; a future hosted version can add MTVC-owned authentication and an approval state without changing the content format.
+Jobs, tenders, announcements, gallery albums, department requirements, intakes, and the service charter are Markdown content managed by the custom CMS. The homepage filters and presents current jobs, tenders, and announcements in its update modal and in-page sections. The local version saves immediately; a future hosted version can add MTVC-owned authentication and an approval state without changing the content format.
 
 ## Deployment
 

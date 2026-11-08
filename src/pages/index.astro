@@ -410,6 +410,8 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
           </div>
         </div>
         <a data-nav="gallery">Gallery</a>
+        <a data-nav="jobs">Jobs</a>
+        <a data-nav="tenders">Tenders</a>
         <div class="has-drop">
           <button class="nav-parent" type="button" aria-expanded="false">Policy</button>
           <div class="drop">
@@ -493,7 +495,7 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
               <button class="updates-arrow previous" type="button" aria-label="Previous update" data-update-previous>&lsaquo;</button>
               <div class="updates-slides">
                 {announcements.map((entry) => (
-                  <a class="cms-update-card update-slide" href={`/announcements/${entry.slug}/`} data-update-slide>
+                  <a class="cms-update-card update-slide" href="#page-announcements" data-nav="announcements" data-update-slide>
                     <span class="cms-update-type">Announcement</span>
                     <h3>{entry.data.title}</h3>
                     <p>{entry.data.description}</p>
@@ -501,7 +503,7 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
                   </a>
                 ))}
                 {jobs.map((entry) => (
-                  <a class="cms-update-card update-slide" href={`/jobs/${entry.slug}/`} data-update-slide>
+                  <a class="cms-update-card update-slide" href="#page-jobs" data-nav="jobs" data-update-slide>
                     <span class="cms-update-type">Job Opportunity</span>
                     <h3>{entry.data.title}</h3>
                     <p>{entry.data.description}</p>
@@ -509,7 +511,7 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
                   </a>
                 ))}
                 {tenders.map((entry) => (
-                  <a class="cms-update-card update-slide" href={`/tenders/${entry.slug}/`} data-update-slide>
+                  <a class="cms-update-card update-slide" href="#page-tenders" data-nav="tenders" data-update-slide>
                     <span class="cms-update-type">Tender Notice</span>
                     <h3>{entry.data.title}</h3>
                     <p>{entry.data.description}</p>
@@ -588,6 +590,79 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
         <p>MTVC works with education, training, assessment, and industry partners to support quality training and student progression.</p>
       </div>
       <img class="partners-image" src="/images/our-partners.jpg" alt="Logos of Mathioya Technical and Vocational College partners">
+    </section>
+  </div>
+
+  <div class="page" id="page-jobs">
+    <div class="page-header">
+      <div class="wrap">
+        <div class="breadcrumb"><a data-nav="home">Home</a><span class="sep">/</span><span>Jobs</span></div>
+        <h1>Jobs and opportunities</h1>
+        <p>Current vacancies and opportunities at Mathioya Technical & Vocational College.</p>
+      </div>
+    </div>
+    <section class="wrap">
+      <div class="section-head">
+        <div><span class="kicker">Opportunities</span><h2>Join the MTVC team.</h2></div>
+        <p>Review current opportunities and follow the instructions in each advert.</p>
+      </div>
+      {jobs.length ? <div class="card-grid three">{jobs.map((entry) => (
+        <article class="card">
+          <span class="cms-update-type">Job opportunity</span>
+          <h3>{entry.data.title}</h3>
+          <p>{entry.data.description}</p>
+          <small>Closes {entry.data.closingDate.toLocaleDateString()}</small>
+          <p><strong>{entry.data.howToApply}</strong></p>
+        </article>
+      ))}</div> : <p>No current job adverts are published.</p>}
+    </section>
+  </div>
+
+  <div class="page" id="page-tenders">
+    <div class="page-header">
+      <div class="wrap">
+        <div class="breadcrumb"><a data-nav="home">Home</a><span class="sep">/</span><span>Tenders</span></div>
+        <h1>Tenders and procurement notices</h1>
+        <p>Current procurement notices from Mathioya Technical & Vocational College.</p>
+      </div>
+    </div>
+    <section class="wrap">
+      <div class="section-head">
+        <div><span class="kicker">Procurement</span><h2>Current tender notices.</h2></div>
+        <p>Review the notice details and download any supporting documents.</p>
+      </div>
+      {tenders.length ? <div class="card-grid three">{tenders.map((entry) => (
+        <article class="card">
+          <span class="cms-update-type">Tender notice</span>
+          <h3>{entry.data.title}</h3>
+          <p>{entry.data.description}</p>
+          <small>Closes {entry.data.closingDate.toLocaleDateString()}</small>
+          <p><strong>{entry.data.reference}</strong></p>
+        </article>
+      ))}</div> : <p>No current tender notices are published.</p>}
+    </section>
+  </div>
+
+  <div class="page" id="page-announcements">
+    <div class="page-header">
+      <div class="wrap">
+        <div class="breadcrumb"><a data-nav="home">Home</a><span class="sep">/</span><span>Announcements</span></div>
+        <h1>Latest announcements</h1>
+        <p>News and notices from Mathioya Technical & Vocational College.</p>
+      </div>
+    </div>
+    <section class="wrap">
+      <div class="section-head">
+        <div><span class="kicker">News</span><h2>What is new at MTVC.</h2></div>
+      </div>
+      {announcements.length ? <div class="card-grid three">{announcements.map((entry) => (
+        <article class="card">
+          <span class="cms-update-type">Announcement</span>
+          <h3>{entry.data.title}</h3>
+          <p>{entry.data.description}</p>
+          <small>Available until {entry.data.endDate.toLocaleDateString()}</small>
+        </article>
+      ))}</div> : <p>No current announcements are published.</p>}
     </section>
   </div>
 
@@ -873,9 +948,9 @@ const tenders = activeTenders(await getCollection("tenders")).filter((entry) => 
           <h4>Resources</h4>
           <a data-nav="admissions">Downloads</a>
           <a data-nav="policy">Service Charter</a>
-          <a href="/jobs/">Jobs</a>
-          <a href="/tenders/">Tenders</a>
-          <a href="/admin/">Staff Portal</a>
+          <a data-nav="jobs">Jobs</a>
+          <a data-nav="tenders">Tenders</a>
+          <a href="http://127.0.0.1:4323/admin/">Staff Portal</a>
         </div>
         <div class="footer-col">
           <h4>Contact</h4>
