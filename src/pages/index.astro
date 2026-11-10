@@ -150,7 +150,7 @@ const departments = [
   .utility-social a:hover{opacity:1;}
 
   /* ===== Nav ===== */
-  header.main{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50; backdrop-filter:blur(6px); box-shadow:0 2px 14px rgba(0,84,133,.1);}
+  header.main{background:var(--paper); border-bottom:1px solid var(--line); position:relative; z-index:50; box-shadow:0 2px 14px rgba(0,84,133,.1);}
   nav.wrap{position:relative; display:flex; align-items:center; justify-content:flex-start; width:100%; max-width:none; margin:0; height:76px;}
   .brand{display:flex; flex:1 1 auto; align-items:center; gap:12px; min-width:0;}
   .crest{width:42px; height:42px; flex:0 0 42px; object-fit:contain;}
@@ -206,26 +206,18 @@ const departments = [
   .hero-visual-tag .dot{width:8px; height:8px; border-radius:50%; background:var(--gold); flex-shrink:0;}
   .hero-visual-tag span{font-size:12.5px; color:var(--color-on-primary);}
 
-  .updates-launcher{display:block; margin:18px auto 0; border:1px solid var(--color-primary); border-radius:999px; padding:9px 18px; background:var(--color-bg); color:var(--color-primary); font-weight:700; cursor:pointer;}
-  .updates-launcher:hover{background:var(--color-primary); color:var(--color-on-primary);}
-  .updates-modal[hidden]{display:none;}
-  .updates-modal{position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:20px;}
-  .updates-backdrop{position:absolute; inset:0; background:rgba(10,5,0,.62); backdrop-filter:blur(3px);}
-  .updates-dialog{position:relative; z-index:1; width:min(680px,100%); padding:34px 42px 28px; border-top:5px solid var(--color-accent); border-radius:16px; background:var(--color-bg); box-shadow:0 24px 70px rgba(10,5,0,.35);}
-  .updates-dialog h2{margin:0 0 6px; color:var(--color-heading); font-size:clamp(1.5rem,4vw,2.1rem);}
-  .updates-intro{max-width:520px; margin:0 0 24px; color:var(--color-text);}
-  .updates-close{position:absolute; top:10px; right:14px; width:34px; height:34px; border:0; border-radius:50%; background:transparent; color:var(--color-heading); font-size:28px; line-height:1; cursor:pointer;}
-  .updates-close:hover,.updates-close:focus-visible{background:var(--color-border); color:var(--color-accent);}
-  .updates-carousel{display:grid; grid-template-columns:38px minmax(0,1fr) 38px; align-items:center; gap:14px;}
-  .updates-slides{min-width:0;}
-  .update-slide{display:none; min-height:0; box-sizing:border-box; padding:20px 22px; border:1px solid var(--color-border); border-top:3px solid var(--color-primary); border-radius:12px; box-shadow:0 10px 24px rgba(0,84,133,.08);}
-  .update-slide.active{display:flex;}
-  .updates-arrow{width:34px; height:34px; border:1px solid var(--color-border); border-radius:50%; background:var(--color-bg); color:var(--color-primary); font-size:26px; line-height:1; cursor:pointer;}
-  .updates-arrow:hover{background:var(--color-primary); color:var(--color-on-primary);}
-  .updates-dots{display:flex; justify-content:center; gap:6px; margin-top:16px;}
-  .updates-dots button{width:8px; height:8px; padding:0; border:0; border-radius:50%; background:var(--color-border); cursor:pointer;}
-  .updates-dots button.active{background:var(--color-accent);}
-  @media(max-width:600px){.updates-dialog{padding:32px 18px 24px}.updates-carousel{grid-template-columns:30px minmax(0,1fr) 30px; gap:8px}.updates-arrow{width:28px;height:28px;font-size:22px}.update-slide{padding:18px 16px}}
+  .announcement-ribbon{position:relative; overflow:hidden; border-bottom:1px solid rgba(255,255,255,.15); background:var(--navy-deep); color:#fff;}
+  .announcement-ribbon::before,.announcement-ribbon::after{position:absolute; top:0; bottom:0; z-index:2; width:48px; content:""; pointer-events:none;}
+  .announcement-ribbon::before{left:0; background:linear-gradient(90deg,var(--navy-deep),transparent);}
+  .announcement-ribbon::after{right:0; background:linear-gradient(270deg,var(--navy-deep),transparent);}
+  .announcement-track{display:flex; width:max-content; animation:announcement-scroll 28s linear infinite;}
+  .announcement-track:hover,.announcement-track:focus-within{animation-play-state:paused;}
+  .announcement-item{display:flex; align-items:center; gap:10px; min-height:44px; padding:0 34px; border-right:1px solid rgba(255,255,255,.16); color:#fff; font-size:13px; font-weight:600; white-space:nowrap;}
+  .announcement-item::before{width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:var(--gold); content:"";}
+  .announcement-item:hover,.announcement-item:focus-visible{color:var(--gold);}
+  @keyframes announcement-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.announcement-track{animation:none; width:100%; justify-content:center; flex-wrap:wrap;}.announcement-item{min-height:38px;}}
+  @media(max-width:600px){.announcement-item{padding:0 22px; font-size:12px;}.announcement-ribbon::before,.announcement-ribbon::after{width:24px;}}
 
   .notice-list{display:grid; gap:16px; max-width:920px; margin-top:28px;}
   .notice-row{display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:24px; min-width:0; padding:18px 20px; border:1px solid var(--color-border); border-left:3px solid var(--color-primary); border-radius:12px; background:var(--color-bg); box-shadow:0 8px 22px rgba(0,84,133,.06); transition:border-color .15s, box-shadow .15s, transform .15s;}
@@ -345,7 +337,7 @@ const departments = [
   .filter-pill{font-size:13px; font-weight:500; padding:8px 16px; border-radius:20px; border:1px solid var(--line); color:var(--ink-soft); cursor:pointer; transition:all .15s;}
   .filter-pill.on, .filter-pill:hover{background:var(--navy); border-color:var(--navy); color:#fff;}
   .masonry{columns:4 220px; column-gap:14px;}
-  .masonry img{border-radius:10px; margin-bottom:14px; width:100%; break-inside:avoid; border:1px solid var(--line);}
+  .masonry img{display:block; width:100%; height:auto; aspect-ratio:auto; object-fit:contain; border-radius:10px; margin-bottom:14px; break-inside:avoid; border:1px solid var(--line);}
 
   /* ===== Contact ===== */
   .contact-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:56px; align-items:start;}
@@ -514,6 +506,14 @@ const departments = [
 
   <!-- ============ HOME ============ -->
   <div class="page active" id="page-home">
+    <div class="announcement-ribbon" aria-label="Important announcements">
+      <div class="announcement-track">
+        <a class="announcement-item" href="#page-admissions" data-nav="admissions">January 2027 intake is now ongoing — Apply for admission</a>
+        <a class="announcement-item" href="#page-announcements" data-nav="announcements">First-ever Graduation Ceremony — 5 February 2027 — Read more</a>
+        <a class="announcement-item" href="#page-admissions" data-nav="admissions" tabindex="-1" aria-hidden="true">January 2027 intake is now ongoing — Apply for admission</a>
+        <a class="announcement-item" href="#page-announcements" data-nav="announcements" tabindex="-1" aria-hidden="true">First-ever Graduation Ceremony — 5 February 2027 — Read more</a>
+      </div>
+    </div>
     <section class="hero" style="padding:0;">
       <div class="hero-inner wrap">
         <div>
@@ -564,54 +564,6 @@ const departments = [
         <div class="strip-item">Vision 2030 aligned <b>demand-driven programs</b></div>
       </div>
     </div>
-
-    {(announcements.length > 0 || jobs.length > 0 || tenders.length > 0) && (
-      <>
-        <button class="updates-launcher" type="button" data-open-updates>View Latest Updates</button>
-        <div class="updates-modal" data-updates-modal hidden>
-          <div class="updates-backdrop" data-close-updates></div>
-          <section class="updates-dialog" role="dialog" aria-modal="true" aria-labelledby="latest-updates-title">
-            <button class="updates-close" type="button" aria-label="Close latest updates" data-close-updates>&times;</button>
-            <p class="kicker">Latest Updates</p>
-            <h2 id="latest-updates-title">What is new at MTVC</h2>
-            <p class="updates-intro">Important announcements and current opportunities from the college.</p>
-            <div class="updates-carousel">
-              <button class="updates-arrow previous" type="button" aria-label="Previous update" data-update-previous>&lsaquo;</button>
-              <div class="updates-slides">
-                {announcements.map((entry) => (
-                  <a class="cms-update-card update-slide" href="#page-announcements" data-nav="announcements" data-update-slide>
-                    <span class="cms-update-type">Announcement</span>
-                    <h3>{entry.data.title}</h3>
-                    <p>{entry.data.description}</p>
-                    <small>Available until {formatDate(entry.data.endDate)}</small>
-                  </a>
-                ))}
-                {jobs.map((entry) => (
-                  <a class="cms-update-card update-slide" href="#page-jobs" data-nav="jobs" data-update-slide>
-                    <span class="cms-update-type">Job Opportunity</span>
-                    <h3>{entry.data.title}</h3>
-                    <p>{entry.data.description}</p>
-                    <small>Closes {formatDate(entry.data.closingDate)}</small>
-                  </a>
-                ))}
-                {tenders.map((entry) => (
-                  <a class="cms-update-card update-slide" href="#page-tenders" data-nav="tenders" data-update-slide>
-                    <span class="cms-update-type">Tender Notice</span>
-                    <h3>{entry.data.title}</h3>
-                    <p>{entry.data.description}</p>
-                    <small>Closes {formatDate(entry.data.closingDate)}</small>
-                  </a>
-                ))}
-              </div>
-              <button class="updates-arrow next" type="button" aria-label="Next update" data-update-next>&rsaquo;</button>
-            </div>
-            <div class="updates-dots" aria-label="Choose latest update">
-              {[...announcements, ...jobs, ...tenders].map((_, index) => <button type="button" aria-label={`Show update ${index + 1}`} data-update-dot={index}></button>)}
-            </div>
-          </section>
-        </div>
-      </>
-    )}
 
     <section class="wrap">
       <div class="pillars">
@@ -899,14 +851,21 @@ const departments = [
         <span class="filter-pill">Events</span>
       </div>
       <div class="masonry">
-        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=500&auto=format&fit=crop">
-        <img src="https://images.unsplash.com/photo-1581091012184-7e0cdfbb6797?q=80&w=500&auto=format&fit=crop">
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=500&auto=format&fit=crop">
-        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=500&auto=format&fit=crop">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=500&auto=format&fit=crop">
-        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=500&auto=format&fit=crop">
-        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=500&auto=format&fit=crop">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=500&auto=format&fit=crop">
+        <img src="/assets/gallery/health-hospital-group-01.jpeg" width="1599" height="1066" loading="lazy" alt="Health students outside a partner hospital">
+        <img src="/assets/gallery/health-hospital-group-02.jpeg" width="1599" height="1066" loading="lazy" alt="Health students outside a partner hospital">
+        <img src="/assets/gallery/Rescue center.jpeg" width="1599" height="1066" loading="lazy" alt="Rescue centre training facility">
+        <img src="/assets/gallery/school garage (2).jpeg" width="1599" height="1066" loading="lazy" alt="College service centre workshop">
+        <img src="/assets/gallery/school garage.jpeg" width="1599" height="1066" loading="lazy" alt="College service centre workshop">
+        <img src="/assets/gallery/driving-truck-front-01.jpeg" width="786" height="1080" loading="lazy" alt="Front view of the college driving school truck">
+        <img src="/assets/gallery/driving-truck-side-01.jpeg" width="1599" height="1066" loading="lazy" alt="Mathioya TVC driving school training truck">
+        <img src="/assets/gallery/Admin block.jpeg" width="1599" height="1066" loading="lazy" alt="Main administration building with college motto">
+        <img src="/assets/gallery/Automotive class.jpeg" width="1599" height="1066" loading="lazy" alt="Trainees working in the motor vehicle workshop">
+        <img src="/assets/gallery/Automotive garage 2.jpeg" width="1599" height="1066" loading="lazy" alt="Trainer demonstrating an engine testing bench">
+        <img src="/assets/gallery/Automotive garage 3.jpeg" width="1599" height="1066" loading="lazy" alt="Trainees and visitors at a vehicle lift">
+        <img src="/assets/gallery/Automotive garage.jpeg" width="1599" height="1066" loading="lazy" alt="Automotive training in the college workshop">
+        <img src="/assets/gallery/health-hospital-orientation-01.jpeg" width="1599" height="1066" loading="lazy" alt="Health students receiving an orientation at a hospital">
+        <img src="/assets/gallery/Kiriaini garage.jpeg" width="1599" height="1066" loading="lazy" alt="College automotive workshop">
+        <img src="/assets/gallery/Spiro Agent.jpeg" width="1599" height="1066" loading="lazy" alt="College staff visiting an industry partner">
       </div>
     </section>
   </div>
@@ -1051,7 +1010,6 @@ const departments = [
   });
 
   function goTo(id){
-    if(updatesModal && !updatesModal.hidden) closeUpdates();
     pages.forEach(p => p.classList.remove('active'));
     const target = document.getElementById('page-' + id);
     if(target){ target.classList.add('active'); window.scrollTo({top:0, behavior:'smooth'}); }
@@ -1105,37 +1063,6 @@ const departments = [
   }
   heroDots.forEach(dot => dot.addEventListener('click', () => showHeroSlide(Number(dot.dataset.heroDot))));
   window.setInterval(() => showHeroSlide(heroIndex + 1), 5500);
-
-  const updatesModal = document.querySelector('[data-updates-modal]');
-  const updateSlides = document.querySelectorAll('[data-update-slide]');
-  const updateDots = document.querySelectorAll('[data-update-dot]');
-  let updateIndex = 0;
-  function showUpdate(index){
-    if(!updateSlides.length) return;
-    updateIndex = (index + updateSlides.length) % updateSlides.length;
-    updateSlides.forEach((slide, i) => slide.classList.toggle('active', i === updateIndex));
-    updateDots.forEach((dot, i) => dot.classList.toggle('active', i === updateIndex));
-  }
-  function closeUpdates(){
-    if(!updatesModal) return;
-    updatesModal.hidden = true;
-    document.body.style.overflow = '';
-    window.sessionStorage.setItem('mtvc-updates-closed', 'true');
-  }
-  function openUpdates(){
-    if(!updatesModal) return;
-    updatesModal.hidden = false;
-    document.body.style.overflow = 'hidden';
-    showUpdate(updateIndex);
-  }
-  document.querySelectorAll('[data-close-updates]').forEach(button => button.addEventListener('click', closeUpdates));
-  document.querySelector('[data-open-updates]')?.addEventListener('click', openUpdates);
-  document.querySelector('[data-update-previous]')?.addEventListener('click', () => showUpdate(updateIndex - 1));
-  document.querySelector('[data-update-next]')?.addEventListener('click', () => showUpdate(updateIndex + 1));
-  updateDots.forEach(dot => dot.addEventListener('click', () => showUpdate(Number(dot.dataset.updateDot))));
-  if(updatesModal && !window.sessionStorage.getItem('mtvc-updates-closed')){
-    window.setTimeout(openUpdates, 700);
-  }
 
   goTo('home');
 </script>
