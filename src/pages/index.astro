@@ -150,7 +150,7 @@ const departments = [
   .utility-social a:hover{opacity:1;}
 
   /* ===== Nav ===== */
-  header.main{background:var(--paper); border-bottom:1px solid var(--line); position:relative; z-index:50; box-shadow:0 2px 14px rgba(0,84,133,.1);}
+  header.main{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50; backdrop-filter:blur(6px); box-shadow:0 2px 14px rgba(0,84,133,.1);}
   nav.wrap{position:relative; display:flex; align-items:center; justify-content:flex-start; width:100%; max-width:none; margin:0; height:76px;}
   .brand{display:flex; flex:1 1 auto; align-items:center; gap:12px; min-width:0;}
   .crest{width:42px; height:42px; flex:0 0 42px; object-fit:contain;}
